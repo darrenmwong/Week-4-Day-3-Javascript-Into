@@ -1,15 +1,23 @@
 // create a namespace for our iterator functions
 var Iterators = (function() {
   return {
-    each: function (arr, action) {
-      // implment the each iterator
-      // such that action is applied
-      // to each element on the array
-      // to which this function was applied
-      // this function should also return the 
-      // original array untouched
-    },
+   each: function (arr, action) 
+     {
+     for(var i = 0; i < arr.length; i++)
+     {
+       action(arr[i]);
+       }
+       return arr;
+   },
     map: function(arr, action) {
+      var new_arr = [];
+      var i = 0;
+      Iterators.each(arr,function(x){
+        new_arr[i] = action(x);
+        i++;
+
+      })
+      return new_arr;
       // implement map iterator
       // such that action is applied
       // to each element on the array
@@ -17,6 +25,14 @@ var Iterators = (function() {
       // the results of the applications
     },
     reduce: function(arr, base, action) {
+
+    
+      Iterators.each(arr, function(x) {
+        base = action(base, x);
+      })
+      return base;
+
+
       // as a BONUS, implement reduce
       // btw, reduce is an alias for inject :)
       
